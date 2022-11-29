@@ -1,0 +1,60 @@
+@startuml
+
+class Empresa {
+    + cadTelefone: int
+    + cadLocalizacão: string
+    }
+
+class Escritorio {
+    + localizaçãoEscritorio: string
+    --
+    + manterCadastroEmpresa(): void
+    }
+
+class Departamento {
+    + nomeDepartamento: string
+    + localizaçãoEscritorio: string
+    --
+    + manterCadastroEmpresa(): void
+    }
+
+class EscritorioCentral {
+    + nomeCentral: string
+    }
+
+class EscritorioFilial {
+
+    + nomeFilial: string
+    }
+
+class Funcionario {
+    + nomeFuncionario: string
+    + codigoFuncionario: int
+    + cargoFuncionario: string
+    --
+    + manterCadastroEmpresa(): void
+    }
+
+class RegistroPessoal {
+    + codigoImposto: int
+    + historicoEmprego: string
+    + salario: float
+    --
+    + manterCadastroFuncionario(): void
+    }
+
+diamond dia
+
+Empresa "1" <-- dia
+dia <-- "0,n" Escritorio
+dia <-- "0,n" Departamento
+dia <-- "0,n" Funcionario
+
+Escritorio   "0,n" *-- "0,n" Departamento
+Departamento "1"    -- "0,n" Funcionario
+Funcionario  "1"    .. "1" RegistroPessoal
+
+Escritorio <|-- EscritorioCentral
+Escritorio <|-- EscritorioFilial
+
+@enduml
