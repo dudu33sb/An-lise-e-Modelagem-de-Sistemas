@@ -1,0 +1,53 @@
+@startuml
+
+actor cliente 
+ clienteOnline --|> cliente
+ clienteFisico --|> cliente
+
+actor vendedor 
+actor funcionarioDaProdução
+actor gerente
+actor fornecedor
+
+actor sistemaEcommerce
+actor sistemaERP
+
+left to right direction
+
+rectangle Venda_de_Bolo {
+
+ usecase "Venda de loja física"     as UC1
+ usecase "Venda de loja virtual"    as UC2
+ usecase "Expedição de bolo"        as UC3
+ usecase "Contas a pagar e receber" as UC4
+ usecase "Fabricação dos bolos"     as UC5
+ usecase "Manter estoque"           as UC6
+ usecase "Comprar MP"               as UC7
+
+}
+
+cliente --> UC1 
+cliente --> UC2
+cliente --> UC3
+
+vendedor --> UC1
+vendedor --> UC3
+
+funcionarioDaProdução --> UC4
+funcionarioDaProdução --> UC5
+funcionarioDaProdução --> UC6
+
+gerente ---> UC4
+gerente ---> UC6
+
+fornecedor --> UC7
+
+UC2 <--- sistemaEcommerce
+UC4 <--- sistemaEcommerce
+UC5 <--- sistemaEcommerce
+
+UC4 <-- sistemaERP
+UC5 <-- sistemaERP
+UC6 <-- sistemaERP
+
+@enduml
